@@ -29,40 +29,56 @@ Just say something like:
 
 ---
 
-## Install (3 steps, ~7 minutes total)
+## Install — proven SOP
+
+Each step says *what to do* and *what you should see*. If something doesn't match, stop and message Sim before going further.
 
 ### 1. Install the Claude desktop app
-Get it from https://claude.ai/download (Mac or Windows). The app includes Claude Code built in — no separate installation required.
 
-Sign in once.
+**Do:** Download from https://claude.ai/download (Mac or Windows). Sign in once.
 
-### 2. Install this skill
-Open the Claude app → click the **Code** tab at the top → start a new session → in the chat box, type these two commands one after the other:
+**See:** The Claude app opens. Bundled Claude Code is included — no separate installation.
 
-```
-/plugin marketplace add simmahon/idl-claude-skills
-```
+### 2. Open Terminal and paste the install command
+
+**Do:** Press `⌘ + Space`, type `Terminal`, hit Enter. Paste the line below (single line — don't break it). Press Enter.
 
 ```
-/plugin install idl-brand-documents@ideal-direct
+claude plugin marketplace add simmahon/idl-claude-skills && claude plugin install idl-brand-documents@ideal-direct
 ```
 
-That's it. The skill is installed forever and updates automatically when we push changes.
+**See (over ~10 seconds):**
 
-### 3. Run the one-time onboarding
-Still in the same Claude Code session, type:
+```
+✔ Successfully added marketplace: ideal-direct
+✔ Successfully installed plugin: idl-brand-documents@ideal-direct (scope: user)
+```
+
+> **Note:** The Claude desktop app's Code tab does NOT support `/plugin` slash commands — installation must happen in Terminal. Once installed, the skill works identically in both the desktop app's Code tab and the Terminal CLI.
+
+### 3. Verify the install
+
+**Do:** In the Claude desktop app, click **Customize** in the left sidebar. (Quit and reopen the app first with `⌘ + Q` if you had it open during install — forces a re-scan.)
+
+**See:** Under "Personal plugins" → `Idl brand documents` with the toggle switched ON. Click it; the right panel shows the skill registered with `/idl-brand-documents`.
+
+### 4. Run the one-time onboarding
+
+**Do:** Click **Code** at the top → **+ New session** → pick your home folder when prompted. Type:
 
 ```
 start the IDL onboarding
 ```
 
-Claude asks 11 questions (~5 minutes). Confirm the summary at the end. You're set up.
+**See:** Claude asks 11 questions (~5 minutes). Answer them, confirm the summary. You're set up.
 
 ---
 
 ## Daily use
 
-Open the Claude app's **Code** tab and say what you need in plain English. Trigger phrases include "branded document", "branded doc", "QC report", "compliance brief", "label check", "supplier message", "listing check".
+Everything below this line stays inside the Claude desktop app's **Code** tab — no Terminal needed ever again.
+
+Say what you need in plain English. Trigger phrases include "branded document", "branded doc", "QC report", "compliance brief", "label check", "supplier message", "listing check".
 
 Examples:
 
@@ -104,8 +120,10 @@ Your interview answers (in `~/.claude/CLAUDE.md`) are kept across updates.
 
 | Problem | Fix |
 |---|---|
-| `/plugin marketplace add` says "command not found" | You're using the regular Claude chat, not the Code tab. Click the **Code** tab at the top of the Claude desktop app, start a new session, then try again. |
-| Marketplace adds but Claude doesn't recognise "branded document" | Run `/plugin install idl-brand-documents@ideal-direct` to install the plugin from the marketplace. Adding the marketplace alone doesn't install plugins. |
+| Terminal says `command not found: claude` | The Claude desktop app isn't installed (or its bundled CLI isn't on PATH). Install from https://claude.ai/download, then re-run the install command. |
+| `/plugin ...` typed in Code tab returns "isn't available in this environment" | The Code tab doesn't expose `/plugin` commands. Plugins must be installed via the Terminal CLI (see Step 2). The skill works in the Code tab once installed. |
+| Customize panel doesn't show the plugin after install | Quit the Claude app fully (`⌘ + Q`), reopen, check Customize again. The app re-scans plugins on startup. |
+| Plugin install fails on Windows with `git: command not found` | Install [Git for Windows](https://git-scm.com/download/win) (free, one-click installer), then re-run the install command. |
 | Onboarding asks the same question twice | Quit Claude Code, restart, try again. If it persists, message Sim. |
 | Generated file doesn't appear | Read Claude's last message — it tells you the exact path. Most often the save folder hasn't been created yet. |
 | Want to re-do onboarding (e.g., role change) | Type: `redo my IDL onboarding`. Claude will overwrite your existing profile. |
