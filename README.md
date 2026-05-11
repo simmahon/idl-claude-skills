@@ -1,3 +1,16 @@
+<p align="center">
+  <img src="assets/repo-banner.png" alt="IDL Branded Documents — Claude Code marketplace for Ideal Direct staff" width="100%" />
+</p>
+
+<p align="center">
+  <a href="#install-3-steps-7-minutes-total"><img src="https://img.shields.io/badge/install-2_commands-DF3918?style=flat-square&labelColor=0E2132" alt="Install"></a>
+  <a href="#daily-use"><img src="https://img.shields.io/badge/onboarding-5_min-393e77?style=flat-square&labelColor=0E2132" alt="Onboarding"></a>
+  <a href="#updates"><img src="https://img.shields.io/badge/updates-auto_on_git_push-22c55e?style=flat-square&labelColor=0E2132" alt="Updates"></a>
+  <img src="https://img.shields.io/badge/platform-macOS_%7C_Windows-6B7280?style=flat-square&labelColor=0E2132" alt="Platform">
+</p>
+
+---
+
 # Ideal Direct — Claude Code Skills
 
 Internal Claude Code marketplace for Ideal Direct staff. Currently distributes one plugin: **`idl-brand-documents`**.
