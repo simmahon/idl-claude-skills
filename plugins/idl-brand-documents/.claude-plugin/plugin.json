@@ -1,0 +1,12 @@
+{
+  "name": "idl-brand-documents",
+  "description": "Generate branded Ideal Direct documents (QC reports, compliance briefs, label checks, supplier comms, listing checks, document registers, trend summaries). Includes a one-time onboarding interview that captures the employee's role, save path, and preferences.",
+  "author": {
+    "name": "Sim Mahon",
+    "email": "sim@idealdirect.co.uk"
+  },
+  "homepage": "https://github.com/simmahon/idl-claude-skills",
+  "repository": "https://github.com/simmahon/idl-claude-skills",
+  "license": "UNLICENSED",
+  "keywords": ["ideal-direct", "branded-documents", "qc", "compliance", "amazon-fba"]
+}

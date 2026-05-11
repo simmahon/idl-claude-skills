@@ -1,0 +1,20 @@
+{
+  "name": "ideal-direct",
+  "description": "Ideal Direct internal Claude Code skills — branded document generation and related employee tooling.",
+  "metadata": {
+    "description": "Ideal Direct internal Claude Code skills — branded document generation and related employee tooling."
+  },
+  "owner": {
+    "name": "Sim Mahon",
+    "email": "sim@idealdirect.co.uk"
+  },
+  "plugins": [
+    {
+      "name": "idl-brand-documents",
+      "source": "./plugins/idl-brand-documents",
+      "description": "Generate branded Ideal Direct A4 HTML/PDF documents — QC reports, compliance briefs, label checks, supplier comms, listing checks, document registers, trend summaries. Includes a one-time onboarding interview.",
+      "category": "productivity",
+      "tags": ["ideal-direct", "branded-documents", "compliance", "qc"]
+    }
+  ]
+}
