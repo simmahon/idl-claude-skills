@@ -92,6 +92,13 @@ Files save to the location you chose during onboarding (default: `~/Ideal Direct
 
 To turn the saved `.html` into a PDF: open it in Google Chrome → **⌘P** (Mac) or **Ctrl+P** (Windows) → Destination: **Save as PDF** → Margins: **None** → Background graphics: **on** → **Save**.
 
+### Check or change your profile
+
+Your IDL profile (saved during onboarding) lives at `~/.claude/idl-profile.json`. To inspect or change it without opening any files manually:
+
+- *show my IDL profile* — Claude reads the file and gives you a clean summary
+- *redo my IDL onboarding* — runs the 11 questions again and overwrites your profile
+
 ---
 
 ## Updates
@@ -102,7 +109,7 @@ When we push changes to this repo, the plugin auto-updates on your next Claude C
 /plugin marketplace update ideal-direct
 ```
 
-Your interview answers (in `~/.claude/CLAUDE.md`) are kept across updates.
+Your interview answers (saved at `~/.claude/idl-profile.json`) are kept across updates.
 
 ---
 
@@ -111,7 +118,7 @@ Your interview answers (in `~/.claude/CLAUDE.md`) are kept across updates.
 | What | Where |
 |---|---|
 | The plugin (managed by Claude Code, don't touch) | `~/.claude/plugins/cache/ideal-direct/idl-brand-documents/` |
-| Your interview answers (your IDL profile) | `~/.claude/CLAUDE.md` (in an `### IDL profile` block) |
+| Your interview answers (your IDL profile) | `~/.claude/idl-profile.json` |
 | Your finished documents | The save path you chose during onboarding |
 
 ---
