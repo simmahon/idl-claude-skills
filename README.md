@@ -62,15 +62,27 @@ claude plugin marketplace add simmahon/idl-claude-skills && claude plugin instal
 
 **See:** Under "Personal plugins" → `Idl brand documents` with the toggle switched ON. Click it; the right panel shows the skill registered with `/idl-brand-documents`.
 
-### 4. Run the one-time onboarding
+### 4. Create your IDL working folder (one time, ~5 seconds)
 
-**Do:** Click **Code** at the top → **+ New session** → pick your home folder when prompted. Type:
+This is the folder you'll open every time you start a Claude Code session. Keeping it consistent prevents Claude from accidentally loading context from unrelated projects.
+
+**Mac:** Finder → click **Documents** in the sidebar → right-click empty space → **New Folder** → name it `IDL-Claude`.
+
+**Windows:** File Explorer → click **Documents** → right-click empty space → **New** → **Folder** → name it `IDL-Claude`.
+
+> **If you already have a dedicated IDL working folder** (from previous Claude or Cowork work), skip this step and use that folder instead.
+
+### 5. Run the one-time onboarding
+
+**Do:** Click **Code** at the top → **+ New session** → pick the `IDL-Claude` folder you just made (or your existing IDL folder). Type:
 
 ```
 start the IDL onboarding
 ```
 
 **See:** Claude asks 11 questions (~5 minutes). Answer them, confirm the summary. You're set up.
+
+> From now on, **always open the same folder** when starting a Claude Code session. This keeps your context clean and your tokens cheap.
 
 ---
 
