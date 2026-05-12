@@ -47,9 +47,12 @@ Each step says *what to do* and *what you should see*. If something doesn't matc
 
 **See:** The Claude app opens. Bundled Claude Code is included — no separate installation.
 
-### 2. Open Terminal and paste the install command
+### 2. Open a terminal and paste the install command
 
-**Do:** Press `⌘ + Space`, type `Terminal`, hit Enter. Paste the line below (single line — don't break it). Press Enter.
+**Mac:** Press `⌘ + Space` → type `Terminal` → hit Enter.
+**Windows:** Press the `Windows` key → type `PowerShell` → hit Enter.
+
+In the window that opens, paste the line below (single line — don't break it). Press Enter.
 
 ```
 claude plugin marketplace add simmahon/idl-claude-skills && claude plugin install idl-brand-documents@ideal-direct
@@ -62,11 +65,15 @@ claude plugin marketplace add simmahon/idl-claude-skills && claude plugin instal
 ✔ Successfully installed plugin: idl-brand-documents@ideal-direct (scope: user)
 ```
 
-> **Note:** The Claude desktop app's Code tab does NOT support `/plugin` slash commands — installation must happen in Terminal. Once installed, the skill works identically in both the desktop app's Code tab and the Terminal CLI.
+> **Windows prerequisite:** Git must be installed. If the install command fails with `git: command not found` or similar, install [Git for Windows](https://git-scm.com/download/win) (free, one-click installer, accept all defaults), then re-run the command. Macs already have git via Xcode Command Line Tools.
+
+> **Note:** The Claude desktop app's Code tab does NOT support `/plugin` slash commands — installation must happen in the terminal. Once installed, the skill works identically in both the desktop app's Code tab and the terminal CLI.
 
 ### 3. Verify the install
 
-**Do:** In the Claude desktop app, click **Customize** in the left sidebar. (Quit and reopen the app first with `⌘ + Q` if you had it open during install — forces a re-scan.)
+**Do:** Quit the Claude app fully — **Mac:** `⌘ + Q`. **Windows:** right-click the Claude icon in the system tray (bottom-right) and pick **Quit**, *or* close all Claude windows and end the process from Task Manager. Reopen the app to force a plugin re-scan.
+
+Then click **Customize** in the left sidebar.
 
 **See:** Under "Personal plugins" → `Idl brand documents` with the toggle switched ON. Click it; the right panel shows the skill registered with `/idl-brand-documents`.
 
@@ -108,13 +115,19 @@ Examples:
 - *branded pre-launch compliance brief for the new iMedic blood pressure monitor — UK launch in July*
 - *format this QC report for me* (paste raw factory data underneath)
 
-Files save to the location you chose during onboarding (default: `~/Ideal Direct Outputs/{your-role}/{YYYY-MM}/`).
+Files save to the location you chose during onboarding. The default depends on your OS:
+- **Mac:** `~/Ideal Direct Outputs/{your-role}/{YYYY-MM}/`
+- **Windows:** `C:\Users\{your-username}\Ideal Direct Outputs\{your-role}\{YYYY-MM}\`
 
 To turn the saved `.html` into a PDF: open it in Google Chrome → **⌘P** (Mac) or **Ctrl+P** (Windows) → Destination: **Save as PDF** → Margins: **None** → Background graphics: **on** → **Save**.
 
 ### Check or change your profile
 
-Your IDL profile (saved during onboarding) lives at `~/.claude/idl-profile.json`. To inspect or change it without opening any files manually:
+Your IDL profile (saved during onboarding) lives at:
+- **Mac:** `~/.claude/idl-profile.json`
+- **Windows:** `C:\Users\{your-username}\.claude\idl-profile.json`
+
+To inspect or change it without opening any files manually:
 
 - *show my IDL profile* — Claude reads the file and gives you a clean summary
 - *redo my IDL onboarding* — runs the 11 questions again and overwrites your profile
@@ -135,11 +148,14 @@ Your interview answers (saved at `~/.claude/idl-profile.json`) are kept across u
 
 ## Where things live on your computer
 
-| What | Where |
-|---|---|
-| The plugin (managed by Claude Code, don't touch) | `~/.claude/plugins/cache/ideal-direct/idl-brand-documents/` |
-| Your interview answers (your IDL profile) | `~/.claude/idl-profile.json` |
-| Your finished documents | The save path you chose during onboarding |
+| What | Mac path | Windows path |
+|---|---|---|
+| The plugin (managed by Claude Code, don't touch) | `~/.claude/plugins/cache/ideal-direct/idl-brand-documents/` | `%USERPROFILE%\.claude\plugins\cache\ideal-direct\idl-brand-documents\` |
+| Your interview answers (IDL profile) | `~/.claude/idl-profile.json` | `%USERPROFILE%\.claude\idl-profile.json` |
+| Your IDL working folder (session) | `~/Documents/IDL-Claude/` | `%USERPROFILE%\Documents\IDL-Claude\` |
+| Your finished documents | The save path you chose during onboarding | The save path you chose during onboarding |
+
+> **Tip:** In Windows File Explorer, paste `%USERPROFILE%\.claude` into the address bar to jump to the hidden Claude config folder. On Mac, in Finder press `⌘ + Shift + G` and paste `~/.claude`.
 
 ---
 
@@ -147,13 +163,15 @@ Your interview answers (saved at `~/.claude/idl-profile.json`) are kept across u
 
 | Problem | Fix |
 |---|---|
-| Terminal says `command not found: claude` | The Claude desktop app isn't installed (or its bundled CLI isn't on PATH). Install from https://claude.ai/download, then re-run the install command. |
-| `/plugin ...` typed in Code tab returns "isn't available in this environment" | The Code tab doesn't expose `/plugin` commands. Plugins must be installed via the Terminal CLI (see Step 2). The skill works in the Code tab once installed. |
-| Customize panel doesn't show the plugin after install | Quit the Claude app fully (`⌘ + Q`), reopen, check Customize again. The app re-scans plugins on startup. |
-| Plugin install fails on Windows with `git: command not found` | Install [Git for Windows](https://git-scm.com/download/win) (free, one-click installer), then re-run the install command. |
+| Terminal/PowerShell says `command not found: claude` (or `'claude' is not recognized`) | The Claude desktop app isn't installed, or its bundled CLI isn't on PATH. Install from https://claude.ai/download, then re-run. On Windows you may need to **sign out and back in** (or restart) after installing for PATH to update. |
+| `/plugin ...` typed in Code tab returns "isn't available in this environment" | The Code tab doesn't expose `/plugin` commands. Plugins must be installed via the terminal CLI (see Step 2). The skill works in the Code tab once installed. |
+| Customize panel doesn't show the plugin after install | Quit the Claude app fully (Mac: `⌘ + Q`. Windows: right-click tray icon → Quit), reopen, check Customize again. The app re-scans plugins on startup. |
+| Install fails with `git: command not found` (or `'git' is not recognized` on Windows) | **Windows:** install [Git for Windows](https://git-scm.com/download/win) (free, one-click installer, accept defaults), then re-run. **Mac:** when prompted, click Install to get Xcode Command Line Tools. |
+| PowerShell shows a security warning when you paste the install command | Windows sometimes gates pasted commands. Just accept (Y) or paste again. If it blocks execution policy, run PowerShell as Administrator and try again. |
 | Onboarding asks the same question twice | Quit Claude Code, restart, try again. If it persists, message Sim. |
 | Generated file doesn't appear | Read Claude's last message — it tells you the exact path. Most often the save folder hasn't been created yet. |
-| Want to re-do onboarding (e.g., role change) | Type: `redo my IDL onboarding`. Claude will overwrite your existing profile. |
+| Want to re-do onboarding (e.g. role change) | Type: `redo my IDL onboarding`. Claude will overwrite your existing profile. |
+| File paths look wrong on Windows (`~/something`) | The `~` shorthand is Mac/Linux. On Windows it expands to `C:\Users\{your-username}\`. Modern tools usually translate it automatically; if not, type the full Windows path. |
 
 If you're stuck for more than a couple of minutes, message Sim with a screenshot.
 
