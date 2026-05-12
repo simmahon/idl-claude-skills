@@ -25,7 +25,15 @@ Just say something like:
 
 > make me a branded QC report for the Tydi over-door hanger from Ningbo Factory — 50/200 inspected, 2 minor stitching defects
 
-…and you get a fully branded `.html` saved to your local outputs folder, ready to print as PDF.
+…and you get a fully branded multi-page `.html` saved to your local outputs folder, ready to print as PDF. Like this:
+
+<p align="center">
+  <a href="assets/sample-qc-report.html"><img src="assets/sample-qc-cover.png" alt="QC Inspection Report — cover page" width="32%"></a>
+  <a href="assets/sample-qc-report.html"><img src="assets/sample-qc-page2.png" alt="QC Inspection Report — inspection summary &amp; test results" width="32%"></a>
+  <a href="assets/sample-qc-report.html"><img src="assets/sample-qc-page3.png" alt="QC Inspection Report — defects &amp; corrective actions" width="32%"></a>
+</p>
+
+<p align="center"><sub>Real output — three-page A4 QC Inspection Report. <a href="assets/sample-qc-report.html">View the full HTML</a> · open in Chrome → ⌘P / Ctrl+P → Save as PDF.</sub></p>
 
 ---
 
