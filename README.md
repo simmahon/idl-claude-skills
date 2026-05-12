@@ -51,6 +51,8 @@ Each step says *what to do* and *what you should see*. If something doesn't matc
 
 This downloads the IDL skill straight from GitHub and drops it into the right place on your computer. No git, no extra tools, no `claude` CLI required.
 
+> **Important — copy the WHOLE line.** Use the **Copy** button at the top-right of the code block (it appears when you hover). The full command starts with `curl` (Mac) or `irm` (Windows) — *do not* just copy the URL inside it. If you only paste the URL, your terminal will say "no such file or directory" because it tried to run the URL as a command.
+
 #### On a Mac
 
 Open Terminal (press `⌘ + Space` → type `Terminal` → Enter), paste this single line, press Enter:
@@ -66,6 +68,8 @@ Open PowerShell (press the `Windows` key → type `PowerShell` → Enter), paste
 ```
 irm https://raw.githubusercontent.com/simmahon/idl-claude-skills/main/install.ps1 | iex
 ```
+
+> **Do NOT use `claude plugin marketplace add ...`** — that's an older instruction that no longer applies. It requires the standalone Claude Code CLI, which the desktop app doesn't include. If someone forwarded you that command, ignore it and use the one above instead.
 
 **See (either OS, over ~5 seconds):**
 
@@ -181,7 +185,10 @@ After updating, quit and reopen the Claude desktop app to pick up the new versio
 
 | Problem | Fix |
 |---|---|
-| Terminal says `claude: command not found` when running an install command | Old instructions told people to run `claude plugin marketplace add ...`. That requires the standalone Claude Code CLI which the desktop app does NOT bundle. Use the **one-line installer in Step 2** instead — it has no `claude` prerequisite. |
+| Mac Terminal says `zsh: no such file or directory: https://...` | You only pasted the URL — not the full command. The line you need starts with `curl -fsSL` and ends with `\| bash`. Use the Copy button on the code block in Step 2 (don't try to select with the mouse — it'll grab just the link). |
+| Mac Terminal says `claude: command not found` | You're running the **old** install command (`claude plugin marketplace add ...`). Throw it away and use the new one-liner in Step 2. The Claude desktop app does not bundle the `claude` CLI. |
+| Windows PowerShell says `The token '&&' is not a valid statement separator` | Same root cause — you're running the old `claude plugin ...` command. PowerShell 5.1 (default on Windows) doesn't accept `&&`. Use the new `irm ... \| iex` one-liner in Step 2 instead. |
+| Windows PowerShell says `'claude' is not recognized as the name of a cmdlet` | Same — old command, requires the standalone Claude Code CLI which you don't have. Use the new one-liner in Step 2. |
 | Customize panel doesn't show the skill after install | Quit the Claude app fully (Mac: `⌘ + Q`. Windows: right-click tray icon → Quit), reopen, check Customize again. The app re-scans skills on startup. |
 | PowerShell shows a security warning when running the install line | Windows sometimes gates pasted commands. Accept (Y) when prompted. If it blocks with an "execution policy" error, open PowerShell as Administrator and run: `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned`, then re-run the installer. |
 | Mac says `curl: command not found` | Extremely rare on macOS. Open Terminal, type `xcode-select --install`, accept the prompt, wait for install to finish, then re-run the installer. |
