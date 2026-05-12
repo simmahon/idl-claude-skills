@@ -45,37 +45,47 @@ Each step says *what to do* and *what you should see*. If something doesn't matc
 
 **Do:** Download from https://claude.ai/download (Mac or Windows). Sign in once.
 
-**See:** The Claude app opens. Bundled Claude Code is included — no separate installation.
+**See:** The Claude app opens.
 
-### 2. Open a terminal and paste the install command
+### 2. Run the one-line installer
 
-**Mac:** Press `⌘ + Space` → type `Terminal` → hit Enter.
-**Windows:** Press the `Windows` key → type `PowerShell` → hit Enter.
+This downloads the IDL skill straight from GitHub and drops it into the right place on your computer. No git, no extra tools, no `claude` CLI required.
 
-In the window that opens, paste the line below (single line — don't break it). Press Enter.
+#### On a Mac
 
-```
-claude plugin marketplace add simmahon/idl-claude-skills && claude plugin install idl-brand-documents@ideal-direct
-```
-
-**See (over ~10 seconds):**
+Open Terminal (press `⌘ + Space` → type `Terminal` → Enter), paste this single line, press Enter:
 
 ```
-✔ Successfully added marketplace: ideal-direct
-✔ Successfully installed plugin: idl-brand-documents@ideal-direct (scope: user)
+curl -fsSL https://raw.githubusercontent.com/simmahon/idl-claude-skills/main/install.sh | bash
 ```
 
-> **Windows prerequisite:** Git must be installed. If the install command fails with `git: command not found` or similar, install [Git for Windows](https://git-scm.com/download/win) (free, one-click installer, accept all defaults), then re-run the command. Macs already have git via Xcode Command Line Tools.
+#### On Windows
 
-> **Note:** The Claude desktop app's Code tab does NOT support `/plugin` slash commands — installation must happen in the terminal. Once installed, the skill works identically in both the desktop app's Code tab and the terminal CLI.
+Open PowerShell (press the `Windows` key → type `PowerShell` → Enter), paste this single line, press Enter:
+
+```
+irm https://raw.githubusercontent.com/simmahon/idl-claude-skills/main/install.ps1 | iex
+```
+
+**See (either OS, over ~5 seconds):**
+
+```
+Installing IDL Branded Documents skill…
+Downloading from GitHub… done
+Extracting… done
+Installing… done
+✓ Installed to /Users/{you}/.claude/skills/idl-brand-documents
+```
+
+> **Why this approach:** The Claude desktop app does NOT include the `claude` command-line tool by default — only the GUI. Earlier instructions used `claude plugin marketplace add ...`, which only works if you've separately installed the Claude Code CLI (most employees haven't). This installer skips that prerequisite entirely — it just downloads the skill files into the standard location the desktop app reads.
 
 ### 3. Verify the install
 
-**Do:** Quit the Claude app fully — **Mac:** `⌘ + Q`. **Windows:** right-click the Claude icon in the system tray (bottom-right) and pick **Quit**, *or* close all Claude windows and end the process from Task Manager. Reopen the app to force a plugin re-scan.
+**Do:** Quit the Claude app fully — **Mac:** `⌘ + Q`. **Windows:** right-click the Claude icon in the system tray (bottom-right) and pick **Quit**, *or* close all Claude windows. Reopen the app.
 
 Then click **Customize** in the left sidebar.
 
-**See:** Under "Personal plugins" → `Idl brand documents` with the toggle switched ON. Click it; the right panel shows the skill registered with `/idl-brand-documents`.
+**See:** Under "Skills" you should see `idl-brand-documents` listed.
 
 ### 4. Create your IDL working folder (one time, ~5 seconds)
 
@@ -136,13 +146,21 @@ To inspect or change it without opening any files manually:
 
 ## Updates
 
-When we push changes to this repo, the plugin auto-updates on your next Claude Code startup. To force an immediate update:
+When we push changes to this repo, get the latest version by **re-running the same installer command** you used the first time:
 
+**Mac:**
 ```
-/plugin marketplace update ideal-direct
+curl -fsSL https://raw.githubusercontent.com/simmahon/idl-claude-skills/main/install.sh | bash
 ```
 
-Your interview answers (saved at `~/.claude/idl-profile.json`) are kept across updates.
+**Windows:**
+```
+irm https://raw.githubusercontent.com/simmahon/idl-claude-skills/main/install.ps1 | iex
+```
+
+The installer automatically backs up your existing version (with a timestamp) before installing the new one. Your interview answers (`~/.claude/idl-profile.json` on Mac, `%USERPROFILE%\.claude\idl-profile.json` on Windows) are **never touched** by the installer — they survive every update.
+
+After updating, quit and reopen the Claude desktop app to pick up the new version.
 
 ---
 
@@ -163,11 +181,10 @@ Your interview answers (saved at `~/.claude/idl-profile.json`) are kept across u
 
 | Problem | Fix |
 |---|---|
-| Terminal/PowerShell says `command not found: claude` (or `'claude' is not recognized`) | The Claude desktop app isn't installed, or its bundled CLI isn't on PATH. Install from https://claude.ai/download, then re-run. On Windows you may need to **sign out and back in** (or restart) after installing for PATH to update. |
-| `/plugin ...` typed in Code tab returns "isn't available in this environment" | The Code tab doesn't expose `/plugin` commands. Plugins must be installed via the terminal CLI (see Step 2). The skill works in the Code tab once installed. |
-| Customize panel doesn't show the plugin after install | Quit the Claude app fully (Mac: `⌘ + Q`. Windows: right-click tray icon → Quit), reopen, check Customize again. The app re-scans plugins on startup. |
-| Install fails with `git: command not found` (or `'git' is not recognized` on Windows) | **Windows:** install [Git for Windows](https://git-scm.com/download/win) (free, one-click installer, accept defaults), then re-run. **Mac:** when prompted, click Install to get Xcode Command Line Tools. |
-| PowerShell shows a security warning when you paste the install command | Windows sometimes gates pasted commands. Just accept (Y) or paste again. If it blocks execution policy, run PowerShell as Administrator and try again. |
+| Terminal says `claude: command not found` when running an install command | Old instructions told people to run `claude plugin marketplace add ...`. That requires the standalone Claude Code CLI which the desktop app does NOT bundle. Use the **one-line installer in Step 2** instead — it has no `claude` prerequisite. |
+| Customize panel doesn't show the skill after install | Quit the Claude app fully (Mac: `⌘ + Q`. Windows: right-click tray icon → Quit), reopen, check Customize again. The app re-scans skills on startup. |
+| PowerShell shows a security warning when running the install line | Windows sometimes gates pasted commands. Accept (Y) when prompted. If it blocks with an "execution policy" error, open PowerShell as Administrator and run: `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned`, then re-run the installer. |
+| Mac says `curl: command not found` | Extremely rare on macOS. Open Terminal, type `xcode-select --install`, accept the prompt, wait for install to finish, then re-run the installer. |
 | Onboarding asks the same question twice | Quit Claude Code, restart, try again. If it persists, message Sim. |
 | Generated file doesn't appear | Read Claude's last message — it tells you the exact path. Most often the save folder hasn't been created yet. |
 | Want to re-do onboarding (e.g. role change) | Type: `redo my IDL onboarding`. Claude will overwrite your existing profile. |
@@ -179,13 +196,16 @@ If you're stuck for more than a couple of minutes, message Sim with a screenshot
 
 ## For maintainers
 
-Repo structure:
+### Repo structure
 
 ```
 .
 ├── README.md
+├── install.sh                    ← Mac/Linux one-line installer (curl|bash)
+├── install.ps1                   ← Windows one-line installer (irm|iex)
+├── assets/                       ← README banner + sample QC report screenshots
 ├── .claude-plugin/
-│   └── marketplace.json          ← marketplace catalogue
+│   └── marketplace.json          ← marketplace catalogue (for power users with the Claude Code CLI)
 └── plugins/
     └── idl-brand-documents/
         ├── .claude-plugin/
@@ -198,10 +218,27 @@ Repo structure:
                 └── assets/       ← lazy-loaded — base64 logos
 ```
 
-To validate locally before pushing: `claude plugin validate .` from the repo root.
+### How updates reach employees
 
-To test locally without pushing:
+- Edit any file in `plugins/idl-brand-documents/skills/idl-brand-documents/`
+- `git push` to main
+- Employees re-run their installer line (Mac: `curl ... | bash`, Windows: `irm ... | iex`) — see the [Updates](#updates) section above
+- Their interview answers (`~/.claude/idl-profile.json`) are kept across updates
+
+### Power-user install path (with the standalone Claude Code CLI)
+
+If you have the standalone `claude` CLI installed (separate from the desktop app — usually via `curl -fsSL https://claude.com/install.sh | bash`), you can use the proper plugin marketplace system instead, which gives you auto-updates:
+
 ```
-/plugin marketplace add ./path/to/this/repo
-/plugin install idl-brand-documents@ideal-direct
+claude plugin marketplace add simmahon/idl-claude-skills
+claude plugin install idl-brand-documents@ideal-direct
+```
+
+This route is documented for completeness but **not** what employees should use — most don't have the standalone CLI and the desktop app doesn't bundle it. The shell installers in the [Install](#install--proven-sop) section are the right path for everyone else.
+
+### Validate before pushing
+
+If you have the CLI:
+```
+claude plugin validate .
 ```
