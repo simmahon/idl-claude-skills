@@ -15,6 +15,13 @@
       "description": "Generate branded Ideal Direct A4 HTML/PDF documents — QC reports, compliance briefs, label checks, supplier comms, listing checks, document registers, trend summaries. Includes a one-time onboarding interview.",
       "category": "productivity",
       "tags": ["ideal-direct", "branded-documents", "compliance", "qc"]
+    },
+    {
+      "name": "goal",
+      "source": "./plugins/goal",
+      "description": "Set a completion condition; Claude keeps working until met. Emulates the built-in /goal command (https://code.claude.com/docs/en/goal) for environments where it isn't yet available — Claude desktop Code tab, Claude Code below 2.1.x.",
+      "category": "automation",
+      "tags": ["goal", "automation", "autonomous", "loop", "agent"]
     }
   ]
 }

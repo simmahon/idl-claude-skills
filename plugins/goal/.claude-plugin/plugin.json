@@ -1,0 +1,12 @@
+{
+  "name": "goal",
+  "description": "Set a completion condition; Claude keeps working until the condition is met. Emulates the built-in /goal command (https://code.claude.com/docs/en/goal) for environments where it isn't available — like the Claude desktop Code tab or Claude Code below 2.1.x. Triggers on /goal, /goal <condition>, /goal clear, /goal stop.",
+  "author": {
+    "name": "Sim Mahon",
+    "email": "sim@idealdirect.co.uk"
+  },
+  "homepage": "https://github.com/simmahon/idl-claude-skills",
+  "repository": "https://github.com/simmahon/idl-claude-skills",
+  "license": "UNLICENSED",
+  "keywords": ["goal", "automation", "autonomous", "loop", "agent"]
+}
